@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="budget">
+        <item>食品酒水</item>
+        <item>衣服饰品</item>
+        <item>居家物业</item>
+        <item>行车交通</item>
+        <item>交流通讯</item>
+        <item>其他</item>
+    </string-array>
+</resources>
