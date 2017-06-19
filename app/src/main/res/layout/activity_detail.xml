@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.plusend.budget.activity.DetailActivity">
+
+    <EditText
+        android:id="@+id/num_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/name_v1_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintLeft_toLeftOf="@+id/num_et"
+        app:layout_constraintTop_toBottomOf="@+id/num_et" />
+
+    <Spinner
+        android:id="@+id/name_v2_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/name_v1_spinner"
+        app:layout_constraintLeft_toRightOf="@+id/name_v1_spinner"
+        app:layout_constraintTop_toTopOf="@+id/name_v1_spinner" />
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="24dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:spinnersShown="true"
+        android:theme="@style/AlertDialog.AppCompat"
+        app:layout_constraintLeft_toLeftOf="@+id/name_v1_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/name_v1_spinner" />
+
+    <EditText
+        android:id="@+id/remark_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="备注"
+        android:inputType="textPersonName"
+        app:layout_constraintLeft_toLeftOf="@+id/datePicker"
+        app:layout_constraintTop_toBottomOf="@+id/datePicker" />
+
+</android.support.constraint.ConstraintLayout>
