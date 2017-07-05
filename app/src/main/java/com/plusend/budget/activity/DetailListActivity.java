@@ -34,7 +34,7 @@ public class DetailListActivity extends AppCompatActivity {
 
     private void initDetailList() {
         List<Detail> list = JsonDetailUtil.getInstance(this).listDetail();
-        if (list != null) {
+        if (list != null && list.size() > 0) {
             mDetailList.clear();
             mDetailList.addAll(list);
             mAdapter.notifyDataSetChanged();

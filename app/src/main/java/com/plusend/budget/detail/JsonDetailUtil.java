@@ -80,19 +80,21 @@ public class JsonDetailUtil implements DetailUtil {
             List<Detail> result = new ArrayList<>();
 
             String detailString = FileUtil.readJsonFromFile(jsonFile);
-            try {
-                JSONObject detailListJson = new JSONObject(detailString);
-                JSONArray detailArrayJson = detailListJson.getJSONArray("detail");
-                if (detailArrayJson != null && detailArrayJson.length() > 0) {
-                    int length = detailArrayJson.length();
-                    for (int i = 0; i < length; i++) {
-                        JSONObject detailJson = detailArrayJson.getJSONObject(i);
-                        Detail detail = new Detail(detailJson.optString("id"), detailJson.optInt("num"), detailJson.optString("name"), detailJson.optLong("date"), detailJson.optString("remark"));
-                        result.add(detail);
+            if (!TextUtils.isEmpty(detailString)) {
+                try {
+                    JSONObject detailListJson = new JSONObject(detailString);
+                    JSONArray detailArrayJson = detailListJson.getJSONArray("detail");
+                    if (detailArrayJson != null && detailArrayJson.length() > 0) {
+                        int length = detailArrayJson.length();
+                        for (int i = 0; i < length; i++) {
+                            JSONObject detailJson = detailArrayJson.getJSONObject(i);
+                            Detail detail = new Detail(detailJson.optString("id"), detailJson.optInt("num"), detailJson.optString("name"), detailJson.optLong("date"), detailJson.optString("remark"));
+                            result.add(detail);
+                        }
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
             return result;
         }
