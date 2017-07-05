@@ -2,6 +2,8 @@ package com.plusend.budget.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -54,11 +56,19 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save:
-                saveDetail();
+                if (TextUtils.isEmpty(mDetailId)) {
+                    saveDetail(getDetail());
+                } else {
+                    updateDetail(getDetail());
+                }
+                break;
+            case R.id.delete:
+                removeDetail(getDetail());
                 break;
             default:
                 break;
         }
+        finish();
         return super.onOptionsItemSelected(item);
     }
 
@@ -68,7 +78,7 @@ public class DetailActivity extends AppCompatActivity {
         remarkET.setText(detail.remark);
     }
 
-    private void saveDetail() {
+    private Detail getDetail() {
         //TODO 判断各参数合理性
         int num = Integer.parseInt(numET.getText().toString());
 //        String nameV1 = nameV1Spin.getSelectedItem().toString();
@@ -81,6 +91,19 @@ public class DetailActivity extends AppCompatActivity {
         long date = calendar.getTimeInMillis();
         String remark = remarkET.getText().toString();
         Detail detail = mDetailId == null ? new Detail(num, nameV1 + nameV2, date, remark) : new Detail(mDetailId, num, nameV1 + nameV2, date, remark);
+        Log.d(TAG, "getDetail: " + detail);
+        return detail;
+    }
+
+    private void saveDetail(Detail detail) {
         JsonDetailUtil.getInstance(this).saveDetail(detail);
+    }
+
+    private void updateDetail(Detail detail) {
+        JsonDetailUtil.getInstance(this).updateDetail(detail);
+    }
+
+    private void removeDetail(Detail detail) {
+        JsonDetailUtil.getInstance(this).removeDetail(detail);
     }
 }

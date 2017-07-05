@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class JsonDetailUtil implements DetailUtil {
@@ -104,9 +105,11 @@ public class JsonDetailUtil implements DetailUtil {
     public void removeDetail(Detail detail) {
         synchronized (this) {
             List<Detail> detailList = listDetail();
-            for (Detail temp : detailList) {
-                if (TextUtils.equals(temp.getId(), detail.getId())) {
-                    detailList.remove(temp);
+            Iterator<Detail> iterator = detailList.iterator();
+            while (iterator.hasNext()){
+                Detail temp = iterator.next();
+                if(TextUtils.equals(temp.getId(), detail.getId())){
+                    iterator.remove();
                 }
             }
             saveDetailList(detailList);

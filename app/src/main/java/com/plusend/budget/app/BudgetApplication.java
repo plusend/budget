@@ -121,4 +121,16 @@ public class BudgetApplication extends Application {
         Log.d(TAG, jo.toString());
         FileUtil.saveJsonToFile(jo.toString(), new File(context.getFilesDir(), Config.BUDGET_JSON_FILE_NAME));
     }
+
+    // 获取整个预算的值
+    public static int getAllBudgetNum() {
+        int result = 0;
+        for (Budget budget : mBudgetList) {
+            for (Map.Entry<String, Integer> entry : budget.mBudgetMap.entrySet()) {
+                result += entry.getValue();
+            }
+        }
+        Log.d(TAG, "getAllBudgetNum: " + result);
+        return result;
+    }
 }
