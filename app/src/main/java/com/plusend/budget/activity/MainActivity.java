@@ -23,16 +23,20 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     HomeFragment homeFragment = new HomeFragment();
+                    fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
                     fragmentTransaction.replace(R.id.frame_layout, homeFragment);
                     fragmentTransaction.commit();
                     return true;
                 case R.id.navigation_detail:
                     DetailListFragment detailListFragment = new DetailListFragment();
+                    fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+//                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                     fragmentTransaction.replace(R.id.frame_layout, detailListFragment);
                     fragmentTransaction.commit();
                     return true;
                 case R.id.navigation_budget:
                     BudgetFragment budgetFragment = new BudgetFragment();
+                    fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
                     fragmentTransaction.replace(R.id.frame_layout, budgetFragment);
                     fragmentTransaction.commit();
                     return true;
