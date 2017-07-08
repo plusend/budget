@@ -6,4 +6,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="detail_num_hint">number</string>
+    <string name="detail_name_hint">category</string>
+    <string name="detail_date_hint">date</string>
+    <string name="detail_remark_hint">remark</string>
 </resources>
