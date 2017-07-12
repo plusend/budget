@@ -1,15 +1,12 @@
 package com.plusend.budget.model;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.ArrayMap;
-
-import java.util.Map;
 
 public class Budget implements Parcelable {
     public String name;
-    public ArrayMap<String, Integer> mBudgetMap;
+    public String icon;
+    public int num;
 
     @Override
     public int describeContents() {
@@ -19,28 +16,20 @@ public class Budget implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
-        dest.writeInt(this.mBudgetMap.size());
-        for (Map.Entry<String, Integer> entry : this.mBudgetMap.entrySet()) {
-            dest.writeString(entry.getKey());
-            dest.writeValue(entry.getValue());
-        }
+        dest.writeString(this.icon);
+        dest.writeInt(this.num);
     }
 
     public Budget() {
     }
 
-    protected Budget(Parcel in) {
+    public Budget(Parcel in) {
         this.name = in.readString();
-        int mBudgetMapSize = in.readInt();
-        this.mBudgetMap = new ArrayMap<>(mBudgetMapSize);
-        for (int i = 0; i < mBudgetMapSize; i++) {
-            String key = in.readString();
-            Integer value = (Integer) in.readValue(Integer.class.getClassLoader());
-            this.mBudgetMap.put(key, value);
-        }
+        this.icon = in.readString();
+        this.num = in.readInt();
     }
 
-    public static final Parcelable.Creator<Budget> CREATOR = new Parcelable.Creator<Budget>() {
+    public static final Creator<Budget> CREATOR = new Creator<Budget>() {
         @Override
         public Budget createFromParcel(Parcel source) {
             return new Budget(source);
@@ -51,4 +40,13 @@ public class Budget implements Parcelable {
             return new Budget[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Budget{" +
+                "name='" + name + '\'' +
+                ", icon='" + icon + '\'' +
+                ", num=" + num +
+                '}';
+    }
 }

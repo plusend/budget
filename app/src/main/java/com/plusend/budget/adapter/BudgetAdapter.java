@@ -1,28 +1,24 @@
 package com.plusend.budget.adapter;
 
-
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.plusend.budget.R;
-import com.plusend.budget.activity.ChildBudgetActivity;
 import com.plusend.budget.model.Budget;
+import com.plusend.budget.util.ResourceUtil;
 
 import java.util.List;
-import java.util.Map;
 
 public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.BudgetViewHolder> {
     private LayoutInflater mLayoutInflater;
-    private Context mContext;
     private List<Budget> mBudgetList;
 
     public BudgetAdapter(Context mContext, List<Budget> mBudgetList) {
-        this.mContext = mContext;
         this.mBudgetList = mBudgetList;
         this.mLayoutInflater = LayoutInflater.from(mContext);
     }
@@ -34,21 +30,9 @@ public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.BudgetView
 
     @Override
     public void onBindViewHolder(final BudgetViewHolder holder, int position) {
-        holder.nameTV.setText(mBudgetList.get(position).name);
-        String content = "";
-        for (Map.Entry<String, Integer> entry : mBudgetList.get(position).mBudgetMap.entrySet()) {
-            content = content.concat(entry.getKey()).concat("、");
-        }
-        content = content.substring(0, content.length() - 1);
-        holder.contentTV.setText(content);
-        holder.actionTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, ChildBudgetActivity.class);
-                intent.putExtra(ChildBudgetActivity.BUDGET, mBudgetList.get(holder.getAdapterPosition()));
-                mContext.startActivity(intent);
-            }
-        });
+        holder.iconIV.setImageResource(ResourceUtil.getIcon(holder.iconIV.getContext(), mBudgetList.get(position).icon));
+        holder.nameTV.setText(ResourceUtil.getString(holder.nameTV.getContext(), mBudgetList.get(position).name));
+        holder.numTV.setText(String.valueOf(mBudgetList.get(position).num));
     }
 
     @Override
@@ -57,15 +41,15 @@ public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.BudgetView
     }
 
     class BudgetViewHolder extends RecyclerView.ViewHolder {
+        private ImageView iconIV;
         private TextView nameTV;
-        private TextView contentTV;
-        private TextView actionTV;
+        private TextView numTV;
 
         BudgetViewHolder(View itemView) {
             super(itemView);
+            iconIV = (ImageView) itemView.findViewById(R.id.icon_iv);
             nameTV = (TextView) itemView.findViewById(R.id.name_tv);
-            contentTV = (TextView) itemView.findViewById(R.id.content_tv);
-            actionTV = (TextView) itemView.findViewById(R.id.action_iv);
+            numTV = (TextView) itemView.findViewById(R.id.num_tv);
         }
     }
 }

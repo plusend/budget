@@ -11,7 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.BudgetActivity" />
-        <activity android:name=".activity.ChildBudgetActivity" />
         <activity android:name=".activity.DetailActivity" />
         <activity android:name=".activity.DetailListActivity" />
         <activity

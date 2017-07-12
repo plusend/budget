@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.plusend.budget.R;
-import com.plusend.budget.activity.ChildBudgetActivity;
 import com.plusend.budget.activity.DetailActivity;
 import com.plusend.budget.model.Detail;
 

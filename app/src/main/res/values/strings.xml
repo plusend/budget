@@ -4,10 +4,21 @@
     <string name="title_budget">Budget</string>
     <string name="title_detail">Detail</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="detail_num_hint">number *</string>
     <string name="detail_name_hint">category *</string>
     <string name="detail_date_hint">date *</string>
     <string name="detail_remark_hint">remark</string>
+
+    <!-- budget category name -->
+    <string name="category_other">other</string>
+    <string name="category_clothes">clothes</string>
+    <string name="category_communication">communication</string>
+    <string name="category_education">education</string>
+    <string name="category_food">food</string>
+    <string name="category_fruit">fruit</string>
+    <string name="category_gift">gift</string>
+    <string name="category_house">house</string>
+    <string name="category_jewelry">jewelry</string>
+    <string name="category_traffic">traffic</string>
+    <!-- end -->
 </resources>

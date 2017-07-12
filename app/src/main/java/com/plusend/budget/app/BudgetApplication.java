@@ -3,7 +3,6 @@ package com.plusend.budget.app;
 import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.util.Log;
 
 import com.plusend.budget.model.Budget;
@@ -17,7 +16,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 public class BudgetApplication extends Application {
@@ -61,16 +59,8 @@ public class BudgetApplication extends Application {
                     JSONObject iJson = (JSONObject) jsonArray.opt(i);
                     Budget budget = new Budget();
                     budget.name = iJson.optString("name");
-                    JSONArray array = iJson.optJSONArray("budget");
-                    int length = array.length();
-                    ArrayMap<String, Integer> arrayMap = new ArrayMap<>();
-                    for (int j = 0; j < length; j++) {
-                        JSONObject jJson = array.optJSONObject(j);
-                        String name = jJson.optString("name");
-                        int num = jJson.optInt("num");
-                        arrayMap.put(name, num);
-                    }
-                    budget.mBudgetMap = arrayMap;
+                    budget.icon = iJson.optString("icon");
+                    budget.num = iJson.optInt("num");
                     mBudgetList.add(budget);
                 }
             }
@@ -87,7 +77,8 @@ public class BudgetApplication extends Application {
         for (Budget b : mBudgetList) {
             if (TextUtils.equals(b.name, budget.name)) {
                 exist = true;
-                b.mBudgetMap = budget.mBudgetMap;
+                b.icon = budget.icon;
+                b.num = budget.num;
             }
         }
         if (!exist) {
@@ -104,14 +95,8 @@ public class BudgetApplication extends Application {
             for (Budget b : mBudgetList) {
                 JSONObject bo = new JSONObject();
                 bo.put("name", b.name);
-                JSONArray ba = new JSONArray();
-                for (Map.Entry<String, Integer> entry : b.mBudgetMap.entrySet()) {
-                    JSONObject eo = new JSONObject();
-                    eo.put("name", entry.getKey());
-                    eo.put("num", entry.getValue());
-                    ba.put(eo);
-                }
-                bo.put("budget", ba);
+                bo.put("icon", b.icon);
+                bo.put("num", b.num);
                 ja.put(bo);
             }
             jo.put("budget", ja);
@@ -126,9 +111,7 @@ public class BudgetApplication extends Application {
     public static int getAllBudgetNum() {
         int result = 0;
         for (Budget budget : mBudgetList) {
-            for (Map.Entry<String, Integer> entry : budget.mBudgetMap.entrySet()) {
-                result += entry.getValue();
-            }
+            result += budget.num;
         }
         Log.d(TAG, "getAllBudgetNum: " + result);
         return result;
