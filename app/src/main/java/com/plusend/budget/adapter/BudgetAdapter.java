@@ -14,6 +14,7 @@ import com.plusend.budget.activity.ChildBudgetActivity;
 import com.plusend.budget.model.Budget;
 
 import java.util.List;
+import java.util.Map;
 
 public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.BudgetViewHolder> {
     private LayoutInflater mLayoutInflater;
@@ -34,7 +35,13 @@ public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.BudgetView
     @Override
     public void onBindViewHolder(final BudgetViewHolder holder, int position) {
         holder.nameTV.setText(mBudgetList.get(position).name);
-        holder.nameTV.setOnClickListener(new View.OnClickListener() {
+        String content = "";
+        for (Map.Entry<String, Integer> entry : mBudgetList.get(position).mBudgetMap.entrySet()) {
+            content = content.concat(entry.getKey()).concat("、");
+        }
+        content = content.substring(0, content.length() - 1);
+        holder.contentTV.setText(content);
+        holder.actionTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ChildBudgetActivity.class);
@@ -51,10 +58,14 @@ public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.BudgetView
 
     class BudgetViewHolder extends RecyclerView.ViewHolder {
         private TextView nameTV;
+        private TextView contentTV;
+        private TextView actionTV;
 
         BudgetViewHolder(View itemView) {
             super(itemView);
             nameTV = (TextView) itemView.findViewById(R.id.name_tv);
+            contentTV = (TextView) itemView.findViewById(R.id.content_tv);
+            actionTV = (TextView) itemView.findViewById(R.id.action_iv);
         }
     }
 }
